@@ -1,0 +1,33 @@
+{
+  "name": "guac-transfers-server",
+  "version": "1.0.0",
+  "description": "Backend server for Guac Transfers App",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index.js",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jevoncochran/guac-transfers-server.git"
+  },
+  "author": "Jevon Cochran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jevoncochran/guac-transfers-server/issues"
+  },
+  "homepage": "https://github.com/jevoncochran/guac-transfers-server#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "knex": "^3.1.0",
+    "knex-cleaner": "^1.3.1",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "type": "module"
+}

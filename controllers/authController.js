@@ -1,13 +1,14 @@
 import * as authService from "../services/authService.js";
+import bcrypt from "bcryptjs";
 
 // @desc Register user
 // @route POST /api/auth/register
 // @access Public
 const registerUser = async (req, res) => {
-  let { email, password, transferCountry } = req.body;
+  let { email, password } = req.body;
 
   // Validate that required fields are not empty
-  const isRequiredFieldEmpty = !email || !password || !transferCountry;
+  const isRequiredFieldEmpty = !email || !password;
 
   if (isRequiredFieldEmpty) {
     res.status(400).json({ errMsg: "Please add all fieds" });
@@ -24,7 +25,6 @@ const registerUser = async (req, res) => {
     const newUser = await authService.registerUser({
       email,
       password,
-      transferCountry,
     });
 
     res.status(201).json(newUser);
@@ -34,4 +34,34 @@ const registerUser = async (req, res) => {
   }
 };
 
-export { registerUser };
+// @desc Login user
+// @route POST /api/auth/login
+// @access Public
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  // Validate that required fields are not empty
+  const isRequiredFieldEmpty = !email || !password;
+  if (isRequiredFieldEmpty) {
+    res.status(400).json({ errMsg: "Missing email or password" });
+  }
+
+  // Check to see if user exists
+  const user = await authService.findUser(email);
+  if (!user) {
+    res.status(401).json({ errMsg: "Incorrect email or password" });
+  }
+
+  // Validate password
+  const correctPassword = await bcrypt.compare(password, user.password);
+  if (!correctPassword) {
+    res.status(401).json({ errMsg: "Incorrect email or password" });
+  }
+
+  // Remove password from user object
+  delete user.password;
+  console.log("SUCCESSFULLY SIGNED IN");
+  res.status(200).json(user);
+};
+
+export { registerUser, loginUser };

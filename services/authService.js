@@ -9,8 +9,8 @@ const registerUser = async (user) => {
   return Users.registerUser({ ...user, password });
 };
 
-const findUser = async (email) => {
-  return Users.findUserBy({ email });
+const findUserBy = async (filter) => {
+  return Users.findUserBy(filter);
 };
 
-export { registerUser, findUser };
+export { registerUser, findUserBy };

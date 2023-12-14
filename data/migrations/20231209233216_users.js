@@ -9,6 +9,10 @@ export function up(knex) {
     tbl.string("email", 50).notNullable();
 
     tbl.string("password", 50).notNullable();
+
+    tbl.string("language").notNullable();
+
+    tbl.string("country").notNullable();
   });
 }
 

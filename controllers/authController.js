@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 // @route POST /api/auth/register
 // @access Public
 const registerUser = async (req, res) => {
-  let { email, password } = req.body;
+  let { email, password, language, country } = req.body;
 
   // Validate that required fields are not empty
   const isRequiredFieldEmpty = !email || !password;
@@ -15,7 +15,7 @@ const registerUser = async (req, res) => {
   }
 
   // Validate that user does not already exist
-  const userExists = await authService.findUser(email);
+  const userExists = await authService.findUserBy({ email });
 
   if (userExists) {
     res.status(400).json({ errMsg: "User already exists" });
@@ -25,6 +25,8 @@ const registerUser = async (req, res) => {
     const newUser = await authService.registerUser({
       email,
       password,
+      language,
+      country,
     });
 
     res.status(201).json(newUser);
@@ -47,7 +49,7 @@ const loginUser = async (req, res) => {
   }
 
   // Check to see if user exists
-  const user = await authService.findUser(email);
+  const user = await authService.findUserBy({ email });
   if (!user) {
     res.status(401).json({ errMsg: "Incorrect email or password" });
   }
@@ -60,7 +62,6 @@ const loginUser = async (req, res) => {
 
   // Remove password from user object
   delete user.password;
-  console.log("SUCCESSFULLY SIGNED IN");
   res.status(200).json(user);
 };
 

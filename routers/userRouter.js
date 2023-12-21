@@ -1,8 +1,8 @@
-import express from "express";
-import { updateUser } from "../controllers/userController.js";
+const express = require("express");
+const { updateUser } = require("../controllers/userController.js");
 
 const router = express.Router();
 
 router.patch("/:id", updateUser);
 
-export default router;
+module.exports = router;

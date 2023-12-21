@@ -1,5 +1,5 @@
-import * as userService from "../services/userService.js";
-import * as authService from "../services/authService.js";
+const userService = require("../services/userService.js");
+const authService = require("../services/authService.js");
 
 // @desc Update user
 // @route PATCH /api/users/:id
@@ -26,4 +26,4 @@ const updateUser = async (req, res) => {
   }
 };
 
-export { updateUser };
+module.exports = { updateUser };

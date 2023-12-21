@@ -2,7 +2,7 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-export function up(knex) {
+exports.up = function(knex) {
   return knex.schema.createTable("banks", (tbl) => {
     tbl.increments();
 
@@ -16,6 +16,6 @@ export function up(knex) {
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-export function down(knex) {
+exports.down = function(knex) {
   return knex.schema.dropTableIfExists("banks");
 }

@@ -1,4 +1,4 @@
-import * as conversionService from "../services/conversionService.js";
+const conversionService = require("../services/conversionService.js");
 
 const convertCurrency = async (req, res) => {
   const { from, to, amount } = req.query;
@@ -17,4 +17,4 @@ const convertCurrency = async (req, res) => {
   }
 };
 
-export { convertCurrency };
+module.exports = { convertCurrency };

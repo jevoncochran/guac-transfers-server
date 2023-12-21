@@ -1,5 +1,5 @@
-import Banks from "../models/bankModel.js";
-import CashPickupSites from "../models/cashPickupSitesModel.js";
+const Banks = require("../models/bankModel.js");
+const CashPickupSites = require("../models/cashPickupSitesModel.js");
 
 const getCashPickupSites = async (country) => {
   const banks = await Banks.getBanksThatOfferCashPickup(country);
@@ -8,4 +8,4 @@ const getCashPickupSites = async (country) => {
   return { banks, otherSites };
 };
 
-export { getCashPickupSites };
+module.exports = { getCashPickupSites };

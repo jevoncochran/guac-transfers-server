@@ -1,5 +1,5 @@
-import * as authService from "../services/authService.js";
-import bcrypt from "bcryptjs";
+const authService = require("../services/authService.js");
+const bcrypt = require("bcryptjs");
 
 // @desc Register user
 // @route POST /api/auth/register
@@ -65,4 +65,4 @@ const loginUser = async (req, res) => {
   res.status(200).json(user);
 };
 
-export { registerUser, loginUser };
+module.exports = { registerUser, loginUser };

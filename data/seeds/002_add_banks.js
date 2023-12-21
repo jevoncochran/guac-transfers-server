@@ -2,8 +2,8 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-export async function seed(knex) {
-  await knex("banks").insert([
+exports.seed = function (knex) {
+  return knex("banks").insert([
     { id: 1, name: "Bancolombia", country: "CO", isCashPickupSite: true },
     { id: 2, name: "Banco de Bogotá", country: "CO", isCashPickupSite: false },
     { id: 3, name: "Davivienda", country: "CO", isCashPickupSite: true },
@@ -15,4 +15,4 @@ export async function seed(knex) {
     },
     { id: 5, name: "BBVA", country: "CO", isCashPickupSite: true },
   ]);
-}
+};

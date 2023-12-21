@@ -1,4 +1,4 @@
-import * as cashPickupService from "../services/cashPickupService.js";
+const cashPickupService = require("../services/cashPickupService.js");
 
 // @desc Get cash pickup sites
 // @route GET /api/cash-pickup-sites
@@ -18,4 +18,4 @@ const getCashPickupSites = async (req, res) => {
   }
 };
 
-export { getCashPickupSites };
+module.exports = { getCashPickupSites };

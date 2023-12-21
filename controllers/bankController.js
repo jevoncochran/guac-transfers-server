@@ -1,4 +1,4 @@
-import * as bankService from "../services/bankService.js";
+const bankService = require("../services/bankService.js");
 
 // @desc Get banks
 // @route GET /api/banks
@@ -16,4 +16,4 @@ const getBanks = async (req, res) => {
   }
 };
 
-export { getBanks };
+module.exports = { getBanks };

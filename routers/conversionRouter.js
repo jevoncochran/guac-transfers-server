@@ -1,8 +1,8 @@
-import express from "express";
-import { convertCurrency } from "../controllers/conversionController.js";
+const express = require("express");
+const { convertCurrency } = require("../controllers/conversionController.js");
 
 const router = express.Router();
 
 router.get("/", convertCurrency);
 
-export default router;
+module.exports = router;

@@ -1,4 +1,4 @@
-import Users from "../models/userModel.js";
+const Users = require("../models/userModel.js");
 
 const updateUser = async (body) => {
   const { userId, updates } = body;
@@ -6,4 +6,4 @@ const updateUser = async (body) => {
   return Users.updateUser({ userId, updates });
 };
 
-export { updateUser };
+module.exports = { updateUser };

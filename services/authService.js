@@ -1,5 +1,5 @@
-import bcrypt from "bcryptjs";
-import Users from "../models/userModel.js";
+const bcrypt = require("bcryptjs");
+const Users = require("../models/userModel.js");
 
 const registerUser = async (user) => {
   let { password } = user;
@@ -10,7 +10,8 @@ const registerUser = async (user) => {
 };
 
 const findUserBy = async (filter) => {
+  console.log("THIS IS WORKING");
   return Users.findUserBy(filter);
 };
 
-export { registerUser, findUserBy };
+module.exports = { registerUser, findUserBy };

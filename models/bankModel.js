@@ -4,4 +4,8 @@ const getBanks = async (country) => {
   return db("banks").where(country);
 };
 
-export default { getBanks };
+const getBanksThatOfferCashPickup = async (country) => {
+  return db("banks").where(country).where({ isCashPickupSite: true });
+};
+
+export default { getBanks, getBanksThatOfferCashPickup };

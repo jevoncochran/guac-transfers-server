@@ -5,6 +5,7 @@ import authRouter from "../routers/authRouter.js";
 import userRouter from "../routers/userRouter.js";
 import conversionRouter from "../routers/conversionRouter.js";
 import bankRouter from "../routers/bankRouter.js";
+import cashPickupRouter from "../routers/cashPickupRouter.js";
 
 const server = express();
 
@@ -19,5 +20,6 @@ server.use("/api/auth", authRouter);
 server.use("/api/users", userRouter);
 server.use("/api/convert", conversionRouter);
 server.use("/api/banks", bankRouter);
+server.use("/api/cash-pickup-sites", cashPickupRouter);
 
 export default server;

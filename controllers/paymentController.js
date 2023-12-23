@@ -1,26 +1,24 @@
-// const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const dotenv = require("dotenv");
+dotenv.config();
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const authService = require("../services/authService.js");
 
-// This example sets up an endpoint using the Express framework.
-// To learn more about Express, watch this video: https://youtu.be/rPR2aJ6XnAc.
-// const express = require('express');
-// const app = express();
+const addPaymentMethod = async (req, res) => {
+  const { id } = req.params;
+  const { tokenId } = req.body;
 
-// const stripe = require('stripe')('sk_test_51OPZTnAeBM4XCpn0K2kieFUnTKxdSMs6mSg0E9j75BYafMxQDBEFhZWo17ZW76AyRmbt3Rr7vLCpjT6dJJQIZ7J30052ZHUW3N');
+  const user = await authService.findUserBy({ id });
 
-// app.post('/create-checkout-session', async (req, res) => {
-//   const session = await stripe.checkout.sessions.create({
-//     payment_method_types: ['card'],
-//     mode: 'setup',
-//     ui_mode: 'embedded',
-//     return_url: 'https://example.com/checkout/return?session_id={CHECKOUT_SESSION_ID}'
-//   });
+  try {
+    const card = await stripe.customers.createSource(user.stripe_customer_id, {
+      source: tokenId,
+    });
+    res.status(200).json({ success: true, data: card });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ errMsg: "Unable to add payment method" });
+  }
+};
 
-//   res.send({clientSecret: session.client_secret});
-// });
-const stripe = require("stripe");
+module.exports = { addPaymentMethod };
 
-// const stripe = stripe(process.env.STRIPE_SECRET_KEY);
-
-// const addPaymentMethod = async (req, res) => {
-//   const session = await
-// };

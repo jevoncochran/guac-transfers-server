@@ -21,7 +21,7 @@ const updateUser = async (req, res) => {
 
     res.status(201).json(updated);
   } catch (error) {
-    console.log(err);
+    console.log(error);
     res.status(500).json({ errMsg: "Unable to update user" });
   }
 };

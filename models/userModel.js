@@ -1,4 +1,4 @@
-import db from "../data/dbConfig.js";
+const db = require("../data/dbConfig.js");
 
 const registerUser = async (user) => {
   return db("users")
@@ -13,4 +13,10 @@ const findUserBy = async (filter) => {
   return db("users").where(filter).first();
 };
 
-export default { registerUser, findUserBy };
+const updateUser = async (body) => {
+  const { userId, updates } = body;
+
+  return db("users").where({ id: userId }).update(updates);
+};
+
+module.exports = { registerUser, findUserBy, updateUser };

@@ -1,21 +1,21 @@
-import * as authService from "../services/authService.js";
-import bcrypt from "bcryptjs";
+const authService = require("../services/authService.js");
+const bcrypt = require("bcryptjs");
 
 // @desc Register user
 // @route POST /api/auth/register
 // @access Public
 const registerUser = async (req, res) => {
-  let { email, password } = req.body;
+  let { firstName, lastName, email, password, language, country } = req.body;
 
   // Validate that required fields are not empty
-  const isRequiredFieldEmpty = !email || !password;
+  const isRequiredFieldEmpty = !firstName || !lastName || !email || !password;
 
   if (isRequiredFieldEmpty) {
-    res.status(400).json({ errMsg: "Please add all fieds" });
+    res.status(400).json({ errMsg: "Please add all fields" });
   }
 
   // Validate that user does not already exist
-  const userExists = await authService.findUser(email);
+  const userExists = await authService.findUserBy({ email });
 
   if (userExists) {
     res.status(400).json({ errMsg: "User already exists" });
@@ -23,13 +23,19 @@ const registerUser = async (req, res) => {
 
   try {
     const newUser = await authService.registerUser({
+      firstName,
+      lastName,
       email,
       password,
+      language,
+      country,
     });
 
+    // Remove password from user object
+    delete newUser.password;
     res.status(201).json(newUser);
   } catch (error) {
-    console.log(err);
+    console.log(error);
     res.status(500).json({ errMsg: "Unable to create user" });
   }
 };
@@ -47,7 +53,7 @@ const loginUser = async (req, res) => {
   }
 
   // Check to see if user exists
-  const user = await authService.findUser(email);
+  const user = await authService.findUserBy({ email });
   if (!user) {
     res.status(401).json({ errMsg: "Incorrect email or password" });
   }
@@ -60,8 +66,7 @@ const loginUser = async (req, res) => {
 
   // Remove password from user object
   delete user.password;
-  console.log("SUCCESSFULLY SIGNED IN");
   res.status(200).json(user);
 };
 
-export { registerUser, loginUser };
+module.exports = { registerUser, loginUser };

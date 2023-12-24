@@ -1,7 +1,11 @@
-import express from "express";
-import cors from "cors";
+const express = require("express");
+const cors = require("cors");
 
-import authRouter from "../routers/authRouter.js";
+const authRouter = require("../routers/authRouter.js");
+const userRouter = require("../routers/userRouter.js");
+const conversionRouter = require("../routers/conversionRouter.js");
+const bankRouter = require("../routers/bankRouter.js");
+const cashPickupRouter = require("../routers/cashPickupRouter.js");
 
 const server = express();
 
@@ -13,5 +17,9 @@ server.get("/", (req, res) => {
 });
 
 server.use("/api/auth", authRouter);
+server.use("/api/users", userRouter);
+server.use("/api/convert", conversionRouter);
+server.use("/api/banks", bankRouter);
+server.use("/api/cash-pickup-sites", cashPickupRouter);
 
-export default server;
+module.exports = server;

@@ -5,18 +5,20 @@ dotenv.config();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const registerUser = async (user) => {
-  let { email, password, language, country } = user;
+  let { firstName, lastName, email, password, language, country } = user;
   const hash = bcrypt.hashSync(password, 8);
   password = hash;
 
   // TODO: Only do this after user is successfully created
   // Create Stripe customer
   const stripeCustomer = await stripe.customers.create({
-    // name: "Jenny Rosen",
+    name: `${firstName} ${lastName}`,
     email,
   });
 
   return Users.registerUser({
+    firstName,
+    lastName,
     email,
     password,
     stripe_customer_id: stripeCustomer.id,

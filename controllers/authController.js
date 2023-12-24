@@ -5,13 +5,13 @@ const bcrypt = require("bcryptjs");
 // @route POST /api/auth/register
 // @access Public
 const registerUser = async (req, res) => {
-  let { email, password, language, country } = req.body;
+  let { firstName, lastName, email, password, language, country } = req.body;
 
   // Validate that required fields are not empty
-  const isRequiredFieldEmpty = !email || !password;
+  const isRequiredFieldEmpty = !firstName || !lastName || !email || !password;
 
   if (isRequiredFieldEmpty) {
-    res.status(400).json({ errMsg: "Please add all fieds" });
+    res.status(400).json({ errMsg: "Please add all fields" });
   }
 
   // Validate that user does not already exist
@@ -23,12 +23,16 @@ const registerUser = async (req, res) => {
 
   try {
     const newUser = await authService.registerUser({
+      firstName,
+      lastName,
       email,
       password,
       language,
       country,
     });
 
+    // Remove password from user object
+    delete newUser.password;
     res.status(201).json(newUser);
   } catch (error) {
     console.log(error);

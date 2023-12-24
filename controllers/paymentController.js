@@ -20,5 +20,19 @@ const addPaymentMethod = async (req, res) => {
   }
 };
 
-module.exports = { addPaymentMethod };
+const getCards = async (req, res) => {
+  const { stripeCustomerId } = req.query;
 
+  try {
+    const cards = await stripe.paymentMethods.list({
+      type: "card",
+      customer: stripeCustomerId,
+    });
+    res.status(200).json(cards);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ errMsg: "Unable to retrieve cards" });
+  }
+};
+
+module.exports = { addPaymentMethod, getCards };

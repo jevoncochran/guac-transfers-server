@@ -1,7 +1,7 @@
 const transferService = require("../services/transferService.js");
 
 // @desc Create transfer
-// @route POST /api/send-money
+// @route POST /api/transfers/send
 // @access Private
 const completeTransfer = async (req, res) => {
   const data = req.body;

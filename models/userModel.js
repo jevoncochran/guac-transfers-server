@@ -19,4 +19,8 @@ const updateUser = async (body) => {
   return db("users").where({ id: userId }).update(updates);
 };
 
-module.exports = { registerUser, findUserBy, updateUser };
+const getTransfersByUser = async (userId) => {
+  return db("transfers").where({ senderId: userId });
+};
+
+module.exports = { registerUser, findUserBy, updateUser, getTransfersByUser };

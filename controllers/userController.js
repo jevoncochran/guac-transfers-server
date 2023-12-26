@@ -26,4 +26,21 @@ const updateUser = async (req, res) => {
   }
 };
 
-module.exports = { updateUser };
+// @desc Get transfers by user
+// @route GET /api/users/:id/transfer-history
+// @access Private
+const getTransfersByUser = async (req, res) => {
+  // TODO: Prevent users from retrieving transfers that they did not send
+  const { id } = req.params;
+
+  try {
+    const transfers = await userService.getTransfersByUser(id);
+
+    res.status(200).json(transfers);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ errMsg: "Unable to retrieve transfer history" });
+  }
+};
+
+module.exports = { updateUser, getTransfersByUser };

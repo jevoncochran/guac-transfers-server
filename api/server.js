@@ -22,6 +22,6 @@ server.use("/api/users", userRouter);
 server.use("/api/convert", conversionRouter);
 server.use("/api/banks", bankRouter);
 server.use("/api/cash-pickup-sites", cashPickupRouter);
-server.use("/api/send-money", transferRouter);
+server.use("/api/transfers", transferRouter);
 
 module.exports = server;

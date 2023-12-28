@@ -29,9 +29,9 @@ exports.up = function (knex) {
 
     tbl.string("institution").notNullable();
 
-    tbl.string("recipientfirstName").notNullable();
+    tbl.string("recipientFirstName").notNullable();
 
-    tbl.string("recipientlastName").notNullable();
+    tbl.string("recipientLastName").notNullable();
 
     tbl.string("transferCountry").notNullable();
 

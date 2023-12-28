@@ -7,6 +7,7 @@ const conversionRouter = require("../routers/conversionRouter.js");
 const bankRouter = require("../routers/bankRouter.js");
 const cashPickupRouter = require("../routers/cashPickupRouter.js");
 const transferRouter = require("../routers/transferRouter.js");
+const recipientRouter = require("../routers/recipientRouter.js");
 
 const server = express();
 
@@ -23,5 +24,6 @@ server.use("/api/convert", conversionRouter);
 server.use("/api/banks", bankRouter);
 server.use("/api/cash-pickup-sites", cashPickupRouter);
 server.use("/api/transfers", transferRouter);
+server.use("/api/recipients", recipientRouter);
 
 module.exports = server;

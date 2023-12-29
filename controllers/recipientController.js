@@ -5,7 +5,7 @@ const recipientService = require("../services/recipientService.js");
 // @route POST /api/recipients
 // @access Private
 const createRecipient = async (req, res) => {
-  let { senderId } = req.body;
+  let { senderId, recipientFirstName, recipientLastName } = req.body;
 
   //   Check that sender exists
   const senderExists = await authService.findUserBy({ id: senderId });
@@ -15,7 +15,11 @@ const createRecipient = async (req, res) => {
   }
 
   try {
-    const newRecipient = await recipientService.createRecipient(senderId);
+    const newRecipient = await recipientService.createRecipient({
+      senderId,
+      recipientFirstName,
+      recipientLastName,
+    });
     res.status(201).json(newRecipient);
   } catch (error) {
     console.log(error);

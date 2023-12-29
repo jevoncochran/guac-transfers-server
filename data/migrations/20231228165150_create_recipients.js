@@ -18,6 +18,22 @@ exports.up = function (knex) {
     tbl.string("firstName", 50).notNullable();
 
     tbl.string("lastName", 50).notNullable();
+
+    tbl.string("deliveryMethod").notNullable();
+
+    tbl.string("institutionId").notNullable();
+
+    tbl.string("institution").notNullable();
+
+    tbl.string("accountNumber");
+
+    tbl.string("phone").notNullable();
+
+    tbl.string("streetAddress").notNullable();
+
+    tbl.string("city").notNullable();
+
+    tbl.string("state").notNullable();
   });
 };
 

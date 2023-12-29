@@ -5,7 +5,19 @@ const recipientService = require("../services/recipientService.js");
 // @route POST /api/recipients
 // @access Private
 const createRecipient = async (req, res) => {
-  let { senderId, recipientFirstName, recipientLastName } = req.body;
+  let {
+    senderId,
+    recipientFirstName,
+    recipientLastName,
+    deliveryMethod,
+    institutionId,
+    institution,
+    recipientAccountNumber,
+    recipientPhone,
+    recipientStreetAddress,
+    recipientCity,
+    recipientState,
+  } = req.body;
 
   //   Check that sender exists
   const senderExists = await authService.findUserBy({ id: senderId });
@@ -19,6 +31,14 @@ const createRecipient = async (req, res) => {
       senderId,
       recipientFirstName,
       recipientLastName,
+      deliveryMethod,
+      institutionId,
+      institution,
+      recipientAccountNumber,
+      recipientPhone,
+      recipientStreetAddress,
+      recipientCity,
+      recipientState,
     });
     res.status(201).json(newRecipient);
   } catch (error) {
@@ -27,4 +47,26 @@ const createRecipient = async (req, res) => {
   }
 };
 
-module.exports = { createRecipient };
+// @desc Get recipients
+// @route GET /api/recipients?senderId=${senderId}
+// @access Private
+const getRecipientsBySender = async (req, res) => {
+  let { senderId } = req.query;
+
+  //   Check that sender exists
+  const senderExists = await authService.findUserBy({ id: senderId });
+
+  if (!senderExists) {
+    res.status(400).json({ errMsg: "Sender not found" });
+  }
+
+  try {
+    const recipients = await recipientService.getRecipientsBySender(senderId);
+    res.status(200).json(recipients);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ errMsg: "Unable to retrieve recipients" });
+  }
+};
+
+module.exports = { createRecipient, getRecipientsBySender };

@@ -17,6 +17,7 @@ const createRecipient = async (req, res) => {
     recipientStreetAddress,
     recipientCity,
     recipientState,
+    recipientCountry,
   } = req.body;
 
   //   Check that sender exists
@@ -39,6 +40,7 @@ const createRecipient = async (req, res) => {
       recipientStreetAddress,
       recipientCity,
       recipientState,
+      recipientCountry,
     });
     res.status(201).json(newRecipient);
   } catch (error) {
@@ -48,10 +50,10 @@ const createRecipient = async (req, res) => {
 };
 
 // @desc Get recipients
-// @route GET /api/recipients?senderId=${senderId}
+// @route GET /api/recipients?senderId=${senderId}&country=${country}
 // @access Private
 const getRecipientsBySender = async (req, res) => {
-  let { senderId } = req.query;
+  let { senderId, country } = req.query;
 
   //   Check that sender exists
   const senderExists = await authService.findUserBy({ id: senderId });
@@ -61,7 +63,10 @@ const getRecipientsBySender = async (req, res) => {
   }
 
   try {
-    const recipients = await recipientService.getRecipientsBySender(senderId);
+    const recipients = await recipientService.getRecipientsBySender({
+      senderId,
+      country,
+    });
     res.status(200).json(recipients);
   } catch (error) {
     console.log(error);

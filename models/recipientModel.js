@@ -13,8 +13,8 @@ const findRecipientById = async (filter) => {
   return db("recipients").where(filter).first();
 };
 
-const getRecipientsBySender = async (senderId) => {
-  return db("recipients").where({ senderId });
+const getRecipientsBySender = async ({ senderId, country }) => {
+  return db("recipients").where({ senderId }).where({ country });
 };
 
 module.exports = { createRecipient, findRecipientById, getRecipientsBySender };

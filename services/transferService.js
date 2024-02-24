@@ -11,10 +11,12 @@ const completeTransfer = async (transfer) => {
     institutionId,
     institution,
     recipientAccountNumber,
-    recipientPhone,
+    recipientPhoneIso,
+    recipientPhoneNum,
     recipientStreetAddress,
     recipientCity,
     recipientState,
+    transferCountry,
   } = transfer;
 
   if (!recipientId) {
@@ -26,11 +28,14 @@ const completeTransfer = async (transfer) => {
       institutionId,
       institution,
       recipientAccountNumber,
-      recipientPhone,
+      recipientPhoneIso,
+      recipientPhoneNum,
       recipientStreetAddress,
       recipientCity,
       recipientState,
+      recipientCountry: transferCountry,
     });
+
     transfer.recipientId = newRecipient.id;
   }
 

@@ -9,12 +9,14 @@ const createRecipient = async (recipient) => {
     institutionId,
     institution,
     recipientAccountNumber,
-    recipientPhone,
+    recipientPhoneIso,
+    recipientPhoneNum,
     recipientStreetAddress,
     recipientCity,
     recipientState,
+    recipientCountry,
   } = recipient;
-  
+
   return Recipients.createRecipient({
     senderId,
     firstName: recipientFirstName,
@@ -23,15 +25,17 @@ const createRecipient = async (recipient) => {
     institutionId,
     institution,
     accountNumber: recipientAccountNumber,
-    phone: recipientPhone,
+    phoneIso: recipientPhoneIso,
+    phoneNum: recipientPhoneNum,
     streetAddress: recipientStreetAddress,
     city: recipientCity,
     state: recipientState,
+    country: recipientCountry,
   });
 };
 
-const getRecipientsBySender = async (senderId) => {
-  return Recipients.getRecipientsBySender(senderId);
+const getRecipientsBySender = async ({ senderId, country }) => {
+  return Recipients.getRecipientsBySender({ senderId, country });
 };
 
 module.exports = { createRecipient, getRecipientsBySender };

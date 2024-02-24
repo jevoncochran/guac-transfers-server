@@ -37,11 +37,11 @@ exports.up = function (knex) {
 
     tbl.string("recipientPhone").notNullable();
 
-    tbl.string("recipientStreetAddress").notNullable();
+    tbl.string("recipientStreetAddress");
 
-    tbl.string("recipientCity").notNullable();
+    tbl.string("recipientCity");
 
-    tbl.string("recipientState").notNullable();
+    tbl.string("recipientState");
 
     tbl.string("recipientAccountNumber");
 

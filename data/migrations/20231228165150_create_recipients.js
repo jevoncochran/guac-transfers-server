@@ -29,11 +29,13 @@ exports.up = function (knex) {
 
     tbl.string("phone").notNullable();
 
-    tbl.string("streetAddress").notNullable();
+    tbl.string("streetAddress");
 
-    tbl.string("city").notNullable();
+    tbl.string("city");
 
-    tbl.string("state").notNullable();
+    tbl.string("state");
+
+    tbl.string("country").notNullable();
   });
 };
 

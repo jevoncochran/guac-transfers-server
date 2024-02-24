@@ -28,7 +28,6 @@ const registerUser = async (user) => {
 };
 
 const findUserBy = async (filter) => {
-  console.log("THIS IS WORKING");
   return Users.findUserBy(filter);
 };
 

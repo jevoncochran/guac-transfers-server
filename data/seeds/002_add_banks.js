@@ -14,5 +14,16 @@ exports.seed = function (knex) {
       isCashPickupSite: false,
     },
     { id: 5, name: "BBVA", country: "CO", isCashPickupSite: true },
+
+    { id: 6, name: "BBVA", country: "MX", isCashPickupSite: true },
+    { id: 7, name: "Banorte", country: "MX", isCashPickupSite: true },
+    { id: 8, name: "Banco Santander", country: "MX", isCashPickupSite: false },
+    {
+      id: 9,
+      name: "Citibanamex",
+      country: "MX",
+      isCashPickupSite: false,
+    },
+    { id: 10, name: "HSBC", country: "MX", isCashPickupSite: true },
   ]);
 };

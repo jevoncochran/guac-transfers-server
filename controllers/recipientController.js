@@ -1,0 +1,77 @@
+const authService = require("../services/authService.js");
+const recipientService = require("../services/recipientService.js");
+
+// @desc Create recipient
+// @route POST /api/recipients
+// @access Private
+const createRecipient = async (req, res) => {
+  let {
+    senderId,
+    recipientFirstName,
+    recipientLastName,
+    deliveryMethod,
+    institutionId,
+    institution,
+    recipientAccountNumber,
+    recipientPhone,
+    recipientStreetAddress,
+    recipientCity,
+    recipientState,
+    recipientCountry,
+  } = req.body;
+
+  //   Check that sender exists
+  const senderExists = await authService.findUserBy({ id: senderId });
+
+  if (!senderExists) {
+    res.status(400).json({ errMsg: "Sender not found" });
+  }
+
+  try {
+    const newRecipient = await recipientService.createRecipient({
+      senderId,
+      recipientFirstName,
+      recipientLastName,
+      deliveryMethod,
+      institutionId,
+      institution,
+      recipientAccountNumber,
+      recipientPhone,
+      recipientStreetAddress,
+      recipientCity,
+      recipientState,
+      recipientCountry,
+    });
+    res.status(201).json(newRecipient);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ errMsg: "Unable to create recipient" });
+  }
+};
+
+// @desc Get recipients
+// @route GET /api/recipients?senderId=${senderId}&country=${country}
+// @access Private
+const getRecipientsBySender = async (req, res) => {
+  let { senderId, country } = req.query;
+
+  //   Check that sender exists
+  const senderExists = await authService.findUserBy({ id: senderId });
+
+  if (!senderExists) {
+    res.status(400).json({ errMsg: "Sender not found" });
+  }
+
+  try {
+    const recipients = await recipientService.getRecipientsBySender({
+      senderId,
+      country,
+    });
+    res.status(200).json(recipients);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ errMsg: "Unable to retrieve recipients" });
+  }
+};
+
+module.exports = { createRecipient, getRecipientsBySender };

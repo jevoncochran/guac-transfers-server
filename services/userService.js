@@ -6,4 +6,8 @@ const updateUser = async (body) => {
   return Users.updateUser({ userId, updates });
 };
 
-module.exports = { updateUser };
+const getTransfersByUser = async (userId) => {
+  return Users.getTransfersByUser(userId);
+};
+
+module.exports = { updateUser, getTransfersByUser };

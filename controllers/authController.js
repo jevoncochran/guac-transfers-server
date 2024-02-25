@@ -49,24 +49,24 @@ const loginUser = async (req, res) => {
   // Validate that required fields are not empty
   const isRequiredFieldEmpty = !email || !password;
   if (isRequiredFieldEmpty) {
-    res.status(400).json({ errMsg: "Missing email or password" });
+    return res.status(400).json({ errMsg: "Missing email or password" });
   }
-
+ 
   // Check to see if user exists
   const user = await authService.findUserBy({ email });
   if (!user) {
-    res.status(401).json({ errMsg: "Incorrect email or password" });
+    return res.status(401).json({ errMsg: "Incorrect email or password" });
   }
 
   // Validate password
   const correctPassword = await bcrypt.compare(password, user.password);
   if (!correctPassword) {
-    res.status(401).json({ errMsg: "Incorrect email or password" });
+    return res.status(401).json({ errMsg: "Incorrect email or password" });
   }
 
   // Remove password from user object
   delete user.password;
-  res.status(200).json(user);
+  return res.status(200).json(user);
 };
 
 module.exports = { registerUser, loginUser };

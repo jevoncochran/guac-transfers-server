@@ -45,15 +45,15 @@ exports.up = function (knex) {
 
     tbl.string("recipientAccountNumber");
 
-    tbl.decimal("sendAmount").notNullable();
+    tbl.decimal("sendAmount", null).notNullable();
 
-    tbl.decimal("standardFee").notNullable();
+    tbl.decimal("standardFee", null).notNullable();
 
     // tbl.decimal("convertedAmount").notNullable();
 
-    tbl.decimal("thirdPartyCharge").notNullable();
+    tbl.decimal("thirdPartyCharge", null).notNullable();
 
-    tbl.decimal("receiveAmount").notNullable();
+    tbl.decimal("receiveAmount", null).notNullable();
   });
 };
 

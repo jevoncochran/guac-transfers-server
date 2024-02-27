@@ -21,6 +21,7 @@ const completeTransfer = async (transfer) => {
 
   if (!recipientId) {
     const newRecipient = await recipientService.createRecipient({
+      sent: Date.now(),
       senderId,
       recipientFirstName,
       recipientLastName,

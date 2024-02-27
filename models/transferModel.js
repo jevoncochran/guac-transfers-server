@@ -21,7 +21,7 @@ const completeTransfer = async (transfer) => {
           ...transfer,
           sent:
             process.env.NODE_ENV === "production"
-              ? db.raw("to_timestamp(?)", [transfer.sent])
+              ? db.raw("to_timestamp(?)", [transfer.sent / 1000])
               : transfer.sent,
         },
         "id"

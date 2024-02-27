@@ -7,7 +7,7 @@ exports.up = function (knex) {
     tbl.increments();
 
     tbl
-      .integer("senderid")
+      .integer("senderId")
       .notNullable()
       .unsigned()
       .references("id")

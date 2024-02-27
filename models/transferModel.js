@@ -1,4 +1,7 @@
 const db = require("../data/dbConfig.js");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const completeTransfer = async (transfer) => {
   console.log("sent: ", transfer.sent);
@@ -11,7 +14,10 @@ const completeTransfer = async (transfer) => {
         {
           // other fields...
           ...transfer,
-          sent: transfer.sent / 1000,
+          sent:
+            process.env.NODE_ENV === "production"
+              ? db.raw("to_timestamp(?)", [transfer.sent / 1000])
+              : transfer.sent,
         },
         "id"
       )
